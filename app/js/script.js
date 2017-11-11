@@ -60,7 +60,7 @@ const accounts = {
     },
     ledger: l,
   },
-  mergedDonationAcc: {
+  totalDonationAcc: {
     enduser: {
       company: {
         name: 'To charity',
@@ -70,7 +70,28 @@ const accounts = {
   },
 };
 
-async function createAcc(acc, callback) {
+const pubSub = (function pubSub() {
+  const subs = {
+    enduser: [],
+  };
+  return {
+    on(type, fn) {
+      if (typeof subs[type] === 'undefined') {
+        subs[type] = [];
+      }
+      subs[type].push(fn);
+    },
+    trigger(type, arg) {
+      if (typeof subs[type] !== 'undefined') {
+        subs[type].forEach((fn) => {
+          fn(arg);
+        });
+      }
+    },
+  };
+}());
+
+async function createEndUser(acc) {
   let response = await post('v1/customer/endusers', acc.enduser); // create enduser
 
   // wait for user to be set
@@ -88,33 +109,29 @@ async function createAcc(acc, callback) {
 
   // wait for IBAN to be set
   get(`v1/customer/ledgers/${response.ledger_id}/wait`).then((account) => {
-    callback({
-      enduser_id: account.ledger_holder.enduser_id,
-      ledger_id: account.ledger_id,
-      iban: account.iban,
-      bic: account.bic_swift,
-    });
+    pubSub.trigger('enduser', account);
   });
 }
 
-function test(obj) {
-  console.table(obj);
-}
+pubSub.on('enduser', (acc) => {
+  console.log(acc);
+});
 
-createAcc(accounts.georgeExpenseAcc, test);
+createEndUser(accounts.georgeExpenseAcc);
 
 
 /*
  * UX
  */
 const loginButton = document.querySelector('#login-button');
-const app = document.querySelector('#app');
 loginButton.addEventListener('click', () => {
   const req = new XMLHttpRequest();
   req.open('GET', 'platform.html', true);
+  req.responseType = 'document';
   req.addEventListener('load', () => {
-    document.querySelector('#login').remove();
-    app.appendChild(document.createTextNode(req.response));
+    document.open();
+    document.appendChild(req.response.documentElement);
+    document.close();
   });
   req.send();
 });
