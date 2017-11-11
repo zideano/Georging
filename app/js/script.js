@@ -126,12 +126,28 @@ createEndUser(accounts.georgeExpenseAcc);
 const loginButton = document.querySelector('#login-button');
 loginButton.addEventListener('click', () => {
   const req = new XMLHttpRequest();
-  req.open('GET', 'platform.html', true);
+  req.open('GET', 'welcomePage.html', true);
   req.responseType = 'document';
   req.addEventListener('load', () => {
     document.open();
     document.appendChild(req.response.documentElement);
+    const expensesButton = document.querySelector('#expenses-account');
+    expensesButton.addEventListener('click', () => {
+      const req = new XMLHttpRequest();
+      req.open('GET', 'expenses.html', true);
+      req.responseType = 'document';
+      req.addEventListener('load', () => {
+        document.open();
+        document.appendChild(req.response.documentElement);
+        document.close();
+      });
+      req.send();
+    });
     document.close();
   });
   req.send();
 });
+
+
+
+

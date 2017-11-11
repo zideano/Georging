@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>test</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<style>
+#slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+</style>
+<body>
+<div id="login" class="login-box shadow">
+    <header>
+        <h1>Welcome George</h1>
+    </header>
+    <div class="login-wrapper">
+        <div class="center-div">
+            <h2>Expenses Account</h2>
+
+            <div style="">
+                <h3>
+                    Add a donation?
+                </h3>
+                <br>
+
+                £<span id="d"></span>
+            </div>
+            <br>
+
+            <div id="slidecontainer" style="">
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
+            <br>
+
+            <div>
+                <p>
+                    Thanks to your company's matching programme your total donation is
+                    <br>
+                <p>
+                <br>
+
+                <h4>£<span id="demo"></span>
+                </h4> <span id=""></span></p>
+                </p>
+            </div>
+            <br>
+
+            <button id="expenses-account" class="shadow" type="submit">Continue</button>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" charset="utf-8" src="js/screen2.js"></script>
+
+<script>
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+</script>
+</body>
+</html>
