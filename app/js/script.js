@@ -70,41 +70,51 @@ const accounts = {
   },
 };
 
-async function createAcc(acc) {
-  const user = await post('v1/customer/endusers', acc.enduser) // create enduser
-    .then(async (response) => { // wait for user to be set
-      acc.ledger.holder_id = response.enduser_id;
-      const temp = await get(`v1/customer/endusers/${response.enduser_id}/wait`);
-      return temp;
-    })
-    .then((response) => { // create ledger
-      console.log(response);
-      return post('v1/customer/ledgers', acc.ledger);
-    })
-    .then(async (response) => { // wait for ledger to be set
-      console.log(response);
-      const temp = await get(`v1/customer/ledgers/${response.ledger_id}/wait`);
-      return temp;
-    })
-    .then((response) => { // assign IBAN to ledger
-      console.log(response);
-      return post(`v1/customer/ledgers/${response.ledger_id}/assign-iban`);
-    })
-    .then(async (response) => { // wait for IBAN to be set
-      console.log(response);
-      const temp = await get(`v1/customer/ledgers/${response.ledger_id}/wait`);
-      return temp;
-    })
-    .then((response) => {
-      console.log(response);
-      return {
-        enduser_id: response.ledger_holder.enduser_id,
-        ledger_id: response.ledger_id,
-        iban: response.iban,
-        bic: response.bic_swift,
-      };
+async function createAcc(acc, callback) {
+  let response = await post('v1/customer/endusers', acc.enduser); // create enduser
+
+  // wait for user to be set
+  acc.ledger.holder_id = response.enduser_id;
+  response = await get(`v1/customer/endusers/${response.enduser_id}/wait`);
+
+  // create ledger
+  response = await post('v1/customer/ledgers', acc.ledger);
+
+  // wait for ledger to be set
+  response = await get(`v1/customer/ledgers/${response.ledger_id}/wait`);
+
+  // assign IBAN to ledger
+  response = await post(`v1/customer/ledgers/${response.ledger_id}/assign-iban`);
+
+  // wait for IBAN to be set
+  get(`v1/customer/ledgers/${response.ledger_id}/wait`).then((account) => {
+    callback({
+      enduser_id: account.ledger_holder.enduser_id,
+      ledger_id: account.ledger_id,
+      iban: account.iban,
+      bic: account.bic_swift,
     });
-  return user;
+  });
 }
 
-console.log(createAcc(accounts.georgeExpenseAcc));
+function test(obj) {
+  console.table(obj);
+}
+
+createAcc(accounts.georgeExpenseAcc, test);
+
+
+/*
+ * UX
+ */
+const loginButton = document.querySelector('#login-button');
+const app = document.querySelector('#app');
+loginButton.addEventListener('click', () => {
+  const req = new XMLHttpRequest();
+  req.open('GET', 'platform.html', true);
+  req.addEventListener('load', () => {
+    document.querySelector('#login').remove();
+    app.appendChild(document.createTextNode(req.response));
+  });
+  req.send();
+});
