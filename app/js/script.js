@@ -25,48 +25,122 @@ function get(url) {
 //   return cFetch('PUT', url, data);
 // }
 
-const l = {
-  partner_product: 'ExampleBank-EUR-1',
-  asset_class: 'currency',
-  asset_type: 'eur',
-  'ledger-type': 'ledger-type-single-user',
-  'ledger-who-owns-assets': 'ledger-assets-owned-by-me',
-  'ledger-primary-use-types': ['ledger-primary-use-types-payments'],
-  'ledger-t-and-cs-country-of-jurisdiction': 'GB',
-};
-
 const accounts = {
   georgeExpenseAcc: {
-    enduser: {
-      person: {
-        name: 'George',
-      },
+    iban: 'SK2300000991510408055471',
+    ledger_primary_use_types: [
+      'ledger-primary-use-types-payments',
+    ],
+    ledger_id: '5a06ff6f-4150-4247-982e-afb582817353',
+    ledger_holder: {
+      enduser_id: '5a06ff5c-9a3c-4ca4-8007-4d0d5083deb7',
     },
-    ledger: l,
+    ledger_who_owns_assets: 'ledger-assets-owned-by-me',
+    partner_ref: 'examplebank',
+    partner_id: '58fe2ce0-3def-4e08-b778-c121c7f98334',
+    ledger_t_and_cs_country_of_jurisdiction: 'GB',
+    bic_swift: 'SPSRSKBA',
+    ledger_status: 'ledger-status-ok',
+    amount: 0,
+    partner_product: 'ExampleBank-EUR-1',
+    partner: {
+      partner_id: '58fe2ce0-3def-4e08-b778-c121c7f98334',
+      company: {
+        name: 'Example Bank',
+      },
+      partner_ref: 'examplebank',
+    },
+    ledger_iban_status: 'ledger-iban-status-ok',
+    asset_type: 'eur',
+    asset_class: 'currency',
+    ledger_type: 'ledger-type-single-user',
   },
   georgeDonationAcc: {
-    enduser: {
-      person: {
-        name: 'George Donation',
-      },
+    iban: 'SK5400001001510408061009',
+    ledger_primary_use_types: [
+      'ledger-primary-use-types-payments',
+    ],
+    ledger_id: '5a06ff6f-2ff7-4aa1-94b5-c2fef585ad37',
+    ledger_holder: {
+      enduser_id: '5a06ff5c-9a3c-4ca4-8007-4d0d5083deb7',
     },
-    ledger: l,
+    ledger_who_owns_assets: 'ledger-assets-owned-by-me',
+    partner_ref: 'examplebank',
+    partner_id: '58fe2ce0-3def-4e08-b778-c121c7f98334',
+    ledger_t_and_cs_country_of_jurisdiction: 'GB',
+    bic_swift: 'SPSRSKBA',
+    ledger_status: 'ledger-status-ok',
+    amount: 0,
+    partner_product: 'ExampleBank-EUR-1',
+    partner: {
+      partner_id: '58fe2ce0-3def-4e08-b778-c121c7f98334',
+      company: {
+        name: 'Example Bank',
+      },
+      partner_ref: 'examplebank',
+    },
+    ledger_iban_status: 'ledger-iban-status-ok',
+    asset_type: 'eur',
+    asset_class: 'currency',
+    ledger_type: 'ledger-type-single-user',
   },
   colaDonationAcc: {
-    enduser: {
-      company: {
-        name: 'Coca-Cola Donation',
-      },
+    iban: 'SK2300001011510408068245',
+    ledger_primary_use_types: [
+      'ledger-primary-use-types-payments',
+    ],
+    ledger_id: '5a06ff75-6017-4c88-b3ac-794761a854ad',
+    ledger_holder: {
+      enduser_id: '5a06ff5c-9a3c-4ca4-8007-4d0d5083deb7',
     },
-    ledger: l,
+    ledger_who_owns_assets: 'ledger-assets-owned-by-me',
+    partner_ref: 'examplebank',
+    partner_id: '58fe2ce0-3def-4e08-b778-c121c7f98334',
+    ledger_t_and_cs_country_of_jurisdiction: 'GB',
+    bic_swift: 'SPSRSKBA',
+    ledger_status: 'ledger-status-ok',
+    amount: 0,
+    partner_product: 'ExampleBank-EUR-1',
+    partner: {
+      partner_id: '58fe2ce0-3def-4e08-b778-c121c7f98334',
+      company: {
+        name: 'Example Bank',
+      },
+      partner_ref: 'examplebank',
+    },
+    ledger_iban_status: 'ledger-iban-status-ok',
+    asset_type: 'eur',
+    asset_class: 'currency',
+    ledger_type: 'ledger-type-single-user',
   },
   totalDonationAcc: {
-    enduser: {
-      company: {
-        name: 'To charity',
-      },
+    iban: 'SK7800001041510408566566',
+    ledger_primary_use_types: [
+      'ledger-primary-use-types-payments',
+    ],
+    ledger_id: '5a070167-f5a1-406f-96b9-6aa8cbc576a0',
+    ledger_holder: {
+      enduser_id: '5a070154-6388-4d0e-b67b-4ae078fe0cc1',
     },
-    ledger: l,
+    ledger_who_owns_assets: 'ledger-assets-owned-by-me',
+    partner_ref: 'examplebank',
+    partner_id: '58fe2ce0-3def-4e08-b778-c121c7f98334',
+    ledger_t_and_cs_country_of_jurisdiction: 'GB',
+    bic_swift: 'SPSRSKBA',
+    ledger_status: 'ledger-status-ok',
+    amount: 0,
+    partner_product: 'ExampleBank-EUR-1',
+    partner: {
+      partner_id: '58fe2ce0-3def-4e08-b778-c121c7f98334',
+      company: {
+        name: 'Example Bank',
+      },
+      partner_ref: 'examplebank',
+    },
+    ledger_iban_status: 'ledger-iban-status-ok',
+    asset_type: 'eur',
+    asset_class: 'currency',
+    ledger_type: 'ledger-type-single-user',
   },
 };
 
@@ -91,34 +165,14 @@ const pubSub = (function pubSub() {
   };
 }());
 
-async function createEndUser(acc) {
-  let response = await post('v1/customer/endusers', acc.enduser); // create enduser
+console.log(accounts.georgeDonationAcc.bic_swift);
+console.log(accounts.georgeDonationAcc.iban);
 
-  // wait for user to be set
-  acc.ledger.holder_id = response.enduser_id;
-  response = await get(`v1/customer/endusers/${response.enduser_id}/wait`);
-
-  // create ledger
-  response = await post('v1/customer/ledgers', acc.ledger);
-
-  // wait for ledger to be set
-  response = await get(`v1/customer/ledgers/${response.ledger_id}/wait`);
-
-  // assign IBAN to ledger
-  response = await post(`v1/customer/ledgers/${response.ledger_id}/assign-iban`);
-
-  // wait for IBAN to be set
-  get(`v1/customer/ledgers/${response.ledger_id}/wait`).then((account) => {
-    pubSub.trigger('enduser', account);
-  });
-}
-
-pubSub.on('enduser', (acc) => {
-  console.log(acc);
-});
-
-createEndUser(accounts.georgeExpenseAcc);
-
+post('dev/customer/transactions/receive', {
+  amount: 100,
+  'bic-swift': accounts.georgeExpenseAcc.bic_swift,
+  iban: accounts.georgeExpenseAcc.iban,
+})
 
 /*
  * UX
